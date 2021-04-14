@@ -6,7 +6,6 @@ public class EventoVirtual extends Evento {
 
 	private String url;
 
-
 	public EventoVirtual(String nome, LocalDate data, Usuario organizador, String descricao, String url) {
 		super(nome, data, organizador, descricao);
 		this.url = url;
@@ -19,4 +18,10 @@ public class EventoVirtual extends Evento {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "EventoVirtual [url=" + url + "]";
+	}
+
 }

@@ -1,6 +1,7 @@
 package src.senai;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class Evento {
@@ -37,6 +38,12 @@ public class Evento {
 		this.data = data;
 	}
 
+	public void setData(String data) {
+		String format = "dd/MM/yyyy";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		this.data = LocalDate.parse(data, formatter);
+	}
+
 	public Usuario getOrganizador() {
 		return organizador;
 	}
@@ -66,6 +73,11 @@ public class Evento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return "Evento [nome=" + nome + ", data=" + data + ", organizador=" + organizador + "]";
 	}
 
 }

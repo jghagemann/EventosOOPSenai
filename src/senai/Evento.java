@@ -11,6 +11,8 @@ public class Evento implements Agendamento {
 	private LocalDate data;
 	private Usuario organizador;
 	private List<Usuario> participantes;
+	private Usuario[] participantes2;
+	private int posicaoparticipante;
 	private String descricao;
 
 	public Evento(String nome, LocalDate data, Usuario organizador, String descricao) {
@@ -18,6 +20,7 @@ public class Evento implements Agendamento {
 		this.data = data;
 		this.organizador = organizador;
 		this.participantes = new ArrayList<Usuario>();
+		this.participantes2 = new Usuario[10];
 		this.descricao = descricao;
 
 	}
@@ -59,6 +62,13 @@ public class Evento implements Agendamento {
 
 	public void deleteParticipante(Usuario participante) {
 		this.participantes.remove(participante);
+	}
+	
+	public void deleteparticipante2(Usuario participante) {
+		this.participantes2[this.posicaoparticipante] = participante;
+		this.participantes2[this.posicaoparticipante - 1] = participante;
+		this.participantes2[this.posicaoparticipante + 1] = null;
+		this.posicaoparticipante--;
 	}
 
 	public String getDescricao() {

@@ -8,21 +8,23 @@ public class Main {
 		System.out.println("--- Sistema de Eventos ---");
 		Usuario usuario1 = new Usuario("João");
 		Usuario usuario2 = new Usuario("Maria");
-		Usuario usuario3 = new Usuario("Edson");
-		
+
 		System.out.println("--- Evento 1 ---");
 		EventoPresencial evento1 = new EventoPresencial("Java for Dummies", LocalDate.of(2020, 8, 10), usuario1,
 				"Primeiro Evento Presencial", "SENAI/SC", 20);
+
 		evento1.addParticipante(usuario2);
-		evento1.addParticipante(usuario3);
-		evento1.deleteParticipante(usuario2);
 		evento1.setData("12/10/2020");
 		System.out.println(evento1);
 
 		System.out.println("--- Evento 2 ---");
 		EventoVirtual evento2 = new EventoVirtual("PostgreSQL for Dummies", LocalDate.of(2020, 9, 7), usuario2,
 				"Segundo Evento Virtual", "http://eventovirtual.org.br/123");
-		evento2.addParticipante(usuario2);
+		try {
+			evento2.addParticipante(usuario2);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 		System.out.println(evento2);
 
 		System.out.println("--- Compromisso ---");

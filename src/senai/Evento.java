@@ -5,22 +5,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evento implements Agendamento {
+public abstract class Evento implements Agendamento {
 
 	private String nome;
 	private LocalDate data;
 	private Usuario organizador;
 	private List<Usuario> participantes;
-	private Usuario[] participantes2;
-	private int posicaoparticipante;
 	private String descricao;
+
+	/**
+	 * Construtor padrão
+	 * 
+	 * @param nome        do evento
+	 * @param data        do evento
+	 * @param organizador do evento
+	 * @param descricao   do evento
+	 */
 
 	public Evento(String nome, LocalDate data, Usuario organizador, String descricao) {
 		this.nome = nome;
 		this.data = data;
 		this.organizador = organizador;
-		this.participantes = new ArrayList<Usuario>();
-		this.participantes2 = new Usuario[10];
+		this.participantes = new MeuArrayList<Usuario>();
 		this.descricao = descricao;
 
 	}
@@ -56,6 +62,9 @@ public class Evento implements Agendamento {
 	}
 
 	public void addParticipante(Usuario participante) {
+		if (participante == this.organizador) {
+			throw new RuntimeException("O participante informado é o organizador do evento");
+		}
 		this.participantes.add(participante);
 
 	}
@@ -63,12 +72,9 @@ public class Evento implements Agendamento {
 	public void deleteParticipante(Usuario participante) {
 		this.participantes.remove(participante);
 	}
-	
-	public void deleteparticipante2(Usuario participante) {
-		this.participantes2[this.posicaoparticipante] = participante;
-		this.participantes2[this.posicaoparticipante - 1] = participante;
-		this.participantes2[this.posicaoparticipante + 1] = null;
-		this.posicaoparticipante--;
+
+	public int getQuantidadeParticipantes() {
+		return this.participantes.size();
 	}
 
 	public String getDescricao() {
@@ -81,7 +87,8 @@ public class Evento implements Agendamento {
 
 	@Override
 	public String toString() {
-		return "Evento [nome=" + nome + ", data=" + data + ", organizador=" + organizador + "]";
+		return "Evento [nome=" + nome + ", data=" + data + ", organizador=" + organizador + ", parcicipantes= "
+				+ participantes + "]";
 	}
 
 }

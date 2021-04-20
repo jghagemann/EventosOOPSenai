@@ -31,10 +31,12 @@ public class EventoPresencial extends Evento {
 
 	@Override
 	public void addParticipante(Usuario participante) {
-		if (this.getCapacidadeMaxima() <= this.capacidadeMaxima) {
-			super.addParticipante(participante);
-		}
+	    if (this.getQuantidadeParticipantes() > this.capacidadeMaxima) {
+	    	throw new RuntimeException("O evento já está na sua capacidade máxima");
+	    }
+	    super.addParticipante(participante);
 	}
+
 
 	@Override
 	public String toString() {

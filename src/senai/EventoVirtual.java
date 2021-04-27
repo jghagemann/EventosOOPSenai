@@ -18,6 +18,8 @@ public class EventoVirtual extends Evento {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -11,6 +11,7 @@ public class EventoPresencial extends Evento {
 		super(nome, data, organizador, descricao);
 		this.localizacao = localizacao;
 		this.capacidadeMaxima = capacidadeMaxima;
+		
 	}
 
 	public String getLocalizacao() {
@@ -37,7 +38,7 @@ public class EventoPresencial extends Evento {
 	    super.addParticipante(participante);
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "EventoPresencial [localizacao=" + localizacao + ", capacidadeMaxima=" + capacidadeMaxima + "]";

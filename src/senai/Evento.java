@@ -2,7 +2,6 @@ package src.senai;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Evento implements Agendamento {
@@ -12,6 +11,7 @@ public abstract class Evento implements Agendamento {
 	private Usuario organizador;
 	private List<Usuario> participantes;
 	private String descricao;
+	private CategoriaEventoEnum categoriaEvento;
 
 	/**
 	 * Construtor padrão
@@ -28,6 +28,7 @@ public abstract class Evento implements Agendamento {
 		this.organizador = organizador;
 		this.participantes = new MeuArrayList<Usuario>();
 		this.descricao = descricao;
+		this.categoriaEvento = CategoriaEventoEnum.PALESTRA;
 
 	}
 
@@ -65,6 +66,7 @@ public abstract class Evento implements Agendamento {
 		if (participante == this.organizador) {
 			throw new RuntimeException("O participante informado é o organizador do evento");
 		}
+		this.verificarLimitesPacote();
 		this.participantes.add(participante);
 
 	}
@@ -83,6 +85,62 @@ public abstract class Evento implements Agendamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public CategoriaEventoEnum getCategoriaEvento() {
+		return categoriaEvento;
+	}
+
+	public void setCategoriaEvento(CategoriaEventoEnum categoriaEvento) {
+		this.categoriaEvento = categoriaEvento;
+	}
+
+	protected void verificarLimitesPacote() {
+		switch (this.organizador.getPacote()) {
+		case GRATUITO:
+			if (participantes.size() > 30) {
+				throw new RuntimeException("O pacote gratuito permite eventos até 30 participantes");
+			}
+			break;
+
+		case BASICO:
+			if (participantes.size() > 100) {
+				throw new RuntimeException("O pacote básico permite eventos até 30 participantes");
+			}
+			break;
+
+		case PROFISSIONAL:
+			if (participantes.size() > 500) {
+				throw new RuntimeException("O pacote profissional permite eventos até 500 participantes");
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	protected void verificarCategoriaEvento() {
+		switch (this.getCategoriaEvento()) {
+		case PALESTRA:
+			System.out.println("O evento é uma palestra");
+			break;
+
+		case SIMPOSIO:
+			System.out.println("O evento é um simpósio");
+			break;
+
+		case SHOW:
+			System.out.println("O evento é um show");
+			break;
+
+		case MEETUP:
+			System.out.println("O evento é um meetup");
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override

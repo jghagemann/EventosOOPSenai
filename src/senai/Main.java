@@ -1,6 +1,8 @@
 package src.senai;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -38,7 +40,20 @@ public class Main {
 		for (Agendamento agendamento : agendamentos) {
 			System.out.println(agendamento);
 		}
+		
+		System.out.println("--- POLIMORFISMO ---");
+		
+		List<Evento> eventos = new ArrayList<Evento>();
+		eventos.add(evento1);
+		eventos.add(evento2);
+		
+		
+		
+		for (Evento evento : eventos) {
+			System.out.println(evento);
+		}
 		System.out.println("--- FIM ---");
+		
 	}
 
 }
